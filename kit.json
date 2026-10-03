@@ -1,0 +1,96 @@
+{
+  "commands": {
+    "crew-start": {
+      "agents": [
+        "team-lead",
+        "analyst"
+      ]
+    },
+    "crew-next": {
+      "agents": [
+        "team-lead"
+      ]
+    },
+    "crew-status": {
+      "agents": []
+    },
+    "crew-change": {
+      "agents": [
+        "analyst"
+      ]
+    }
+  },
+  "presets": {
+    "full": {
+      "description": "Every agent, skill and command (recommended)",
+      "agents": "*",
+      "skills": "*"
+    },
+    "core": {
+      "description": "Lean loop: requirements -> build -> review (5 agents)",
+      "agents": [
+        "team-lead",
+        "analyst",
+        "spec-writer",
+        "developer",
+        "reviewer",
+        "codebase-expert"
+      ],
+      "skills": [
+        "crew-start",
+        "crew-next",
+        "crew-status",
+        "crew-change"
+      ]
+    },
+    "planning": {
+      "description": "Discovery, specs, design, architecture and tickets",
+      "agents": [
+        "team-lead",
+        "analyst",
+        "spec-writer",
+        "designer",
+        "architect",
+        "project-manager"
+      ],
+      "skills": [
+        "crew-start",
+        "crew-next",
+        "crew-status",
+        "crew-change"
+      ]
+    },
+    "build": {
+      "description": "Build, review, test and release an existing backlog",
+      "agents": [
+        "developer",
+        "reviewer",
+        "tester",
+        "release-manager",
+        "doc-writer"
+      ],
+      "skills": [
+        "track-progress",
+        "write-handoff"
+      ]
+    },
+    "existing-project": {
+      "description": "Join an existing codebase: map it, then build, review and test",
+      "agents": [
+        "codebase-expert",
+        "developer",
+        "reviewer",
+        "tester"
+      ],
+      "skills": [
+        "track-progress",
+        "write-handoff"
+      ]
+    },
+    "skills-only": {
+      "description": "All skills, no agents (for tools without subagents)",
+      "agents": [],
+      "skills": "*"
+    }
+  }
+}

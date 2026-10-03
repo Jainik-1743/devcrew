@@ -1,0 +1,11 @@
+{
+  "name": "devcrew",
+  "owner": { "name": "Jainik Patel", "email": "jainikpatel1743@gmail.com" },
+  "plugins": [
+    {
+      "name": "devcrew",
+      "source": "./",
+      "description": "An AI dev crew of agents and skills that take requirements to a tested, released product, plus a codebase knowledge base."
+    }
+  ]
+}

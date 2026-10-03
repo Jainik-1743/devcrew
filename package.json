@@ -1,0 +1,45 @@
+{
+  "name": "devcrew",
+  "version": "0.0.1",
+  "description": "An AI dev crew for Claude Code and any Agent Skills tool: agents, skills and workflow commands that take requirements to a tested, released product. Install per project or globally with one npx command.",
+  "keywords": [
+    "agent-skills",
+    "ai-agents",
+    "claude-code",
+    "codebase-map",
+    "codex",
+    "devcrew",
+    "frd",
+    "memory",
+    "project-management",
+    "skills",
+    "subagents",
+    "tdd"
+  ],
+  "author": "Jainik Patel <jainikpatel1743@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "devcrew": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "agents",
+    "kit.json",
+    ".claude-plugin",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "test": "node --test test/*.test.js",
+    "check": "npm run validate && npm test",
+    "prepublishOnly": "npm run check"
+  }
+}

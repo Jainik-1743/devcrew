@@ -1,0 +1,18 @@
+{
+  "name": "devcrew",
+  "version": "0.0.1",
+  "description": "An AI dev crew of agents and skills that take requirements to a tested, released product, plus a codebase knowledge base.",
+  "author": {
+    "name": "Jainik Patel",
+    "email": "jainikpatel1743@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "skills",
+    "frd",
+    "tdd",
+    "jira",
+    "workflow"
+  ]
+}
