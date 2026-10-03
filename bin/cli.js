@@ -8,15 +8,15 @@ import { c, banner, select } from '../src/ui.js';
 const HELP = `${c.b('devcrew')} — an AI dev crew (agents + skills) for Claude Code & Agent Skills tools
 
 ${c.b('Usage')}
-  npx devcrew                     interactive setup
-  npx devcrew init [options]      install a preset (default: full)
-  npx devcrew add <name...>       add agents, skills or preset:<name> (dependencies included)
-  npx devcrew remove <name...>    remove items (--all for everything)
-  npx devcrew update              upgrade installed items, keeping files you edited
-  npx devcrew list [--installed]  show agents, skills, presets
-  npx devcrew info <name>         details for one agent or skill
-  npx devcrew doctor              check an install for problems
-  npx devcrew tokens              always-loaded token cost of the kit
+  npx devcrew-kit                     interactive setup
+  npx devcrew-kit init [options]      install a preset (default: full)
+  npx devcrew-kit add <name...>       add agents, skills or preset:<name> (dependencies included)
+  npx devcrew-kit remove <name...>    remove items (--all for everything)
+  npx devcrew-kit update              upgrade installed items, keeping files you edited
+  npx devcrew-kit list [--installed]  show agents, skills, presets
+  npx devcrew-kit info <name>         details for one agent or skill
+  npx devcrew-kit doctor              check an install for problems
+  npx devcrew-kit tokens              always-loaded token cost of the kit
 
 ${c.b('Options')}
   -g, --global          install in your home folder (~/.claude) for every project
@@ -213,7 +213,7 @@ async function main() {
         console.log(c.d(`${target}: ${r.from} → ${catalog.version}`));
         printInstall(r, args);
       }
-      if (!any) console.log(`Nothing installed at ${where(scope)} scope. Run ${c.c('npx devcrew init')}`);
+      if (!any) console.log(`Nothing installed at ${where(scope)} scope. Run ${c.c('npx devcrew-kit init')}`);
       return;
     }
     case 'list':

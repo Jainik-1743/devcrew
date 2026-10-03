@@ -8,10 +8,12 @@ It works for a solo developer on a side project, a team on a product, or anyone 
 > **Status: 0.0.1 (pre-release).** Versions stay at 0.0.x while the kit is being tested. 1.0.0 comes once it is approved as stable.
 
 ```bash
-npx devcrew            # interactive setup
-npx devcrew init       # install everything into this project
-npx devcrew init -g    # ...or globally, for every project
+npx devcrew-kit            # interactive setup
+npx devcrew-kit init       # install everything into this project
+npx devcrew-kit init -g    # ...or globally, for every project
 ```
+
+The npm package is `devcrew-kit`. Installed globally (`npm i -g devcrew-kit`), it also gives you the shorter `devcrew` command.
 
 Then in Claude Code:
 
@@ -39,7 +41,7 @@ Both are excellent and inspired this kit, but they solve different problems.
 | Design | — | Strong (mockups, design review) | Flows → wireframes with **5 states per screen** → tokens → UX and WCAG 2.2 AA checks |
 | Ticket tools | GitHub/Linear | GitHub | **Jira, Linear or GitHub Issues**, with local files as a fallback |
 | State and resume | Handoff doc | Memory/brain | **`project/progress.md` (≤40 lines) + handoff notes + archive**. A new session reads 2 files |
-| Install | `npx skills add` (skills only) | `git clone` + setup script | **`npx devcrew`**: project or global, presets, dependency resolution, safe update/uninstall |
+| Install | `npx skills add` (skills only) | `git clone` + setup script | **`npx devcrew-kit`**: project or global, presets, dependency resolution, safe update/uninstall |
 | Cost control | Short skills | Large, rich prompts | **Enforced budget**: CI fails if a skill passes 60 lines or the always-loaded cost passes 3.5k tokens |
 
 ### What we improved
@@ -61,7 +63,7 @@ Both are excellent and inspired this kit, but they solve different problems.
 Requires Node.js 18.17+. There are no runtime dependencies.
 
 ```bash
-npx devcrew init [--preset <name>] [-g] [-t claude|agents|all]
+npx devcrew-kit init [--preset <name>] [-g] [-t claude|agents|all]
 ```
 
 | Scope | Where | Use when |
@@ -87,15 +89,15 @@ npx devcrew init [--preset <name>] [-g] [-t claude|agents|all]
 ### All commands
 
 ```bash
-npx devcrew add reviewer tester          # agents bring their skills along
-npx devcrew add map-codebase             # or single skills
-npx devcrew add preset:existing-project
-npx devcrew remove tester                # --all removes everything the kit installed
-npx devcrew update                       # upgrade; keeps files you edited (--force to overwrite)
-npx devcrew list [--installed]
-npx devcrew info codebase-expert
-npx devcrew doctor                       # missing files, edited files, version drift
-npx devcrew tokens                       # always-loaded token cost
+npx devcrew-kit add reviewer tester          # agents bring their skills along
+npx devcrew-kit add map-codebase             # or single skills
+npx devcrew-kit add preset:existing-project
+npx devcrew-kit remove tester                # --all removes everything the kit installed
+npx devcrew-kit update                       # upgrade; keeps files you edited (--force to overwrite)
+npx devcrew-kit list [--installed]
+npx devcrew-kit info codebase-expert
+npx devcrew-kit doctor                       # missing files, edited files, version drift
+npx devcrew-kit tokens                       # always-loaded token cost
 ```
 
 Common flags: `--dry-run`, `--force`, `--no-scaffold`, `-y`.
@@ -109,8 +111,8 @@ Pick whichever fits. None of them need npm or GitHub.
 | Way | Commands | Good for |
 |---|---|---|
 | **1. Run the CLI from the folder** | `cd ~/some-project && node /path/to/devcrew/bin/cli.js init` | Installing into a real project of yours |
-| **2. `npm link`** | In this repo: `npm link`. Then anywhere: `devcrew init` (undo: `npm unlink -g devcrew`) | Using it like the published command while you edit the kit |
-| **3. Exact publish simulation** | `npm pack` → `npx --package=./devcrew-0.0.1.tgz devcrew init` | Final check that the published package contains everything |
+| **2. `npm link`** | In this repo: `npm link`. Then anywhere: `devcrew init` (undo: `npm unlink -g devcrew-kit`) | Using it like the published command while you edit the kit |
+| **3. Exact publish simulation** | `npm pack` → `npx --package=./devcrew-kit-0.0.1.tgz devcrew-kit init` | Final check that the published package contains everything |
 | **4. As a plugin** | `claude --plugin-dir /path/to/devcrew` | Testing the plugin form without installing files |
 
 Automated checks: `npm run check` runs the validator and all tests (installs run in temp folders and never touch your home folder).
@@ -206,7 +208,7 @@ Every skill can also be called directly, e.g. `/create-tickets` or `/fix-bug`.
 | Small state files (progress ≤40 lines, handoffs, archive) | New sessions read 2 files instead of chat history |
 | Model routing (haiku/sonnet/opus) | Cheap models for mechanical work |
 
-Check it yourself with `npx devcrew tokens`.
+Check it yourself with `npx devcrew-kit tokens`.
 
 ---
 
