@@ -1,15 +1,67 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  merge_group:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  check:
+  test:
+    name: test (${{ matrix.os }}, node ${{ matrix.node }})
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node: [18, 20, 22, 24]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '${{ matrix.node }}' }
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
       - run: npm run validate
       - run: npm test
+
+  package:
+    name: package contents
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm pack --dry-run
+      - name: CLI runs from the packed tarball
+        run: |
+          npm pack --silent
+          mkdir -p /tmp/smoke && cd /tmp/smoke
+          npx --yes --package="$GITHUB_WORKSPACE"/devcrew-*.tgz devcrew init -y --dry-run
+
+  # Single required check for branch protection: passes only if every job above passed.
+  ci-passed:
+    name: CI passed
+    if: always()
+    needs: [test, package]
+    runs-on: ubuntu-latest
+    steps:
+      - if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+        run: exit 1
+      - run: echo "All checks passed"

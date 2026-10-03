@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write # push the version commit and tags, create GitHub releases
+  pull-requests: write # open/update the "Version Packages" PR
+  id-token: write # npm provenance / trusted publishing
+
+jobs:
+  release:
+    name: Version or publish
+    if: github.repository == 'Jainik-1743/devcrew'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm run check
+
+      # Pending changesets -> open/update the "Version Packages" PR.
+      # No changesets (that PR was merged) -> publish any version not yet on npm, tag and release it.
+      - uses: changesets/action@v2
+        with:
+          version-script: npm run version-packages
+          publish-script: npm run release
+          commit-message: 'chore: version packages'
+          pr-title: 'chore: version packages'
+          # A PAT/App token lets CI run on the Version Packages PR (PRs opened with GITHUB_TOKEN don't trigger workflows).
+          github-token: ${{ secrets.CHANGESETS_TOKEN || github.token }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CHANGESETS_TOKEN || github.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
