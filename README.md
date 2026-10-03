@@ -244,14 +244,21 @@ test/          node:test suite (runs installs in temp folders)
 ```bash
 npm run check        # validate + test
 npm pack --dry-run   # see what will be published
-npm publish          # runs check first (prepublishOnly)
+npx changeset        # describe your change for the next release
 ```
 
 The validator enforces: the folder name matches the `name` field, kebab-case names, short one- or two-sentence descriptions, skills ≤60 lines, every `references/` and `scripts/` file mentioned actually exists, every agent sets `tools` and a valid `model`, every skill is used by an agent, presets and commands resolve, and the plugin version matches the package version.
 
 ### Versioning
 
-`0.0.x` while testing. Bump with `npm version patch` (and update `.claude-plugin/plugin.json`; the validator checks they match). Release `1.0.0` once the kit is approved as stable.
+`0.0.x` while testing; `1.0.0` once the kit is approved as stable. Releases are automated with [Changesets](https://github.com/changesets/changesets):
+
+1. Branch off `main` (it is protected: changes land only through a PR with green CI).
+2. Run `npx changeset`, pick `patch`, write one line for the changelog, and commit the file with your PR.
+3. When the PR merges, the **Release** workflow opens a *Version Packages* PR that bumps `package.json`, `.claude-plugin/plugin.json` and `CHANGELOG.md`.
+4. Merging that PR publishes to npm (with provenance), tags `vX.Y.Z` and creates the GitHub release.
+
+Repo secrets: `NPM_TOKEN` (npm automation/granular token, not needed once npm trusted publishing is set up) and optionally `CHANGESETS_TOKEN` (a PAT so CI runs on the Version Packages PR).
 
 ## License
 

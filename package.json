@@ -16,6 +16,14 @@
     "subagents",
     "tdd"
   ],
+  "homepage": "https://github.com/Jainik-1743/devcrew#readme",
+  "bugs": {
+    "url": "https://github.com/Jainik-1743/devcrew/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jainik-1743/devcrew.git"
+  },
   "author": "Jainik Patel <jainikpatel1743@gmail.com>",
   "license": "MIT",
   "type": "module",
@@ -36,10 +44,20 @@
   "engines": {
     "node": ">=18.17"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "validate": "node scripts/validate.js",
     "test": "node --test test/*.test.js",
     "check": "npm run validate && npm test",
+    "changeset": "changeset",
+    "version-packages": "changeset version && node scripts/sync-version.js",
+    "release": "changeset publish",
     "prepublishOnly": "npm run check"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3"
   }
 }
