@@ -4,6 +4,9 @@ description: Fix review comments one by one, re-run checks, and reply to each fi
 ---
 # Apply feedback
 
+> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+
+
 1. List each Must-fix and Should-fix finding as a checkbox in the ticket under `Review round <n>:`.
 2. For each: reproduce the problem (or add a test that shows it) → fix → run related tests → commit (`fix(review): ... PROJ-12`).
 3. If you disagree with a finding, don't silently skip it: reply with the reason and evidence; the reviewer decides.

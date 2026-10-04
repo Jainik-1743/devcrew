@@ -4,6 +4,9 @@ description: Assess a requirement change and show its impact on specs, design, t
 ---
 # Handle change
 
+> Owner: **analyst** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst`). Inside it, just do the steps.
+
+
 1. Restate the change in one sentence; ask ≤3 question cards if it is ambiguous.
 2. Find what it touches: grep `docs/frd`, `docs/design`, `docs/tickets`, `docs/tech` and the code for affected terms.
 3. Produce the impact table:

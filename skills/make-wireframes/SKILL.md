@@ -4,6 +4,9 @@ description: Create simple grayscale clickable HTML wireframes for each screen, 
 ---
 # Make wireframes
 
+> Owner: **designer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer`). Inside it, just do the steps.
+
+
 For each screen in `docs/design/screens.md` → `docs/design/wireframes/<screen>.html`.
 
 ## Rules

@@ -4,6 +4,9 @@ description: Order tickets by dependencies and value into a sprint that fits cap
 ---
 # Plan sprint
 
+> Owner: **project-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-project-manager`). Inside it, just do the steps.
+
+
 Write `project/sprint-<n>.md`:
 
 ```

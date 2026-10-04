@@ -4,6 +4,9 @@ description: Pick the single next action and the right agent from project state 
 ---
 # Whats next
 
+> Owner: **team-lead** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-team-lead`). Inside it, just do the steps.
+
+
 Input: `project/progress.md` (+ newest handoff). Do not read anything else unless a rule below needs it.
 
 ## Routing table (first matching row wins)

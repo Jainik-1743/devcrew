@@ -4,6 +4,9 @@ description: Write a short plain-language status report for stakeholders (team, 
 ---
 # Status report
 
+> Owner: **release-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-release-manager`). Inside it, just do the steps.
+
+
 Write `docs/reports/status-YYYY-MM-DD.md` from progress, closed tickets and open questions:
 
 ```

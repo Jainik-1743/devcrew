@@ -4,6 +4,9 @@ description: Define design tokens and shared components (color, type, spacing, b
 ---
 # Build design system
 
+> Owner: **designer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer`). Inside it, just do the steps.
+
+
 Outputs: `docs/design/tokens.css` (or the stack's equivalent, e.g. Tailwind theme) + `docs/design/design-system.md`.
 
 1. **Tokens** as CSS variables: color (semantic: `--bg`, `--fg`, `--muted`, `--primary`, `--danger`, `--success`, `--border`),

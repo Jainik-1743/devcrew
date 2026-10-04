@@ -2,7 +2,7 @@
 name: project-manager
 description: Breaks approved FRD sections into small vertical tickets, sizes them, syncs them to Jira, Linear or GitHub Issues, and plans sprints. Use after the tech plan is approved.
 tools: Read, Grep, Glob, Write, Edit, Bash
-model: haiku
+model: inherit
 color: yellow
 skills:
   - create-tickets

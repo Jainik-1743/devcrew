@@ -2,7 +2,7 @@
 name: setup-engineer
 description: Creates the code project to the team standard and connects GitHub, the ticket tracker, Slack and CI. Use once the tech plan is approved, before the first ticket.
 tools: Read, Grep, Glob, Write, Edit, Bash
-model: sonnet
+model: inherit
 color: green
 skills:
   - setup-project

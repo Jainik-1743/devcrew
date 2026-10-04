@@ -2,7 +2,7 @@
 // Enforces the kit's token budget and structure. Run: npm run validate
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCatalog, KIT_ROOT, tokens } from '../src/catalog.js';
+import { loadCatalog, KIT_ROOT, tokens, ownerLine } from '../src/catalog.js';
 import { parseFrontmatter } from '../src/frontmatter.js';
 
 const LIMITS = { skillLines: 60, agentLines: 60, descriptionChars: 220, alwaysLoadedTokens: 3500 };
@@ -28,6 +28,8 @@ for (const s of catalog.skills.values()) {
     if (!fs.existsSync(path.join(s.dir, m[1], m[2]))) err(where, `${m[1]}/${m[2]} is mentioned but missing`);
   }
   if (s.command && data['disable-model-invocation'] !== 'true') err(where, 'commands must set disable-model-invocation: true');
+  const owner = ownerLine(catalog, s.name);
+  if (owner && !text.includes(owner)) err(where, `missing or stale owner line; expected:\n    ${owner}`);
 }
 
 for (const a of catalog.agents.values()) {

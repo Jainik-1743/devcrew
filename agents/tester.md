@@ -2,7 +2,7 @@
 name: tester
 description: Tests features like a real user in the browser or via the API, reports bugs in the standard format, and turns each bug into a regression test. Use after review approval and before release.
 tools: Read, Grep, Glob, Write, Edit, Bash
-model: sonnet
+model: inherit
 color: yellow
 skills:
   - write-test-plan

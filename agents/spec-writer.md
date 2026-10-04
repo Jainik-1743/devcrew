@@ -2,7 +2,7 @@
 name: spec-writer
 description: Writes one FRD section at a time with testable Given/When/Then acceptance checks. Use after the analyst has answered a spec's questions.
 tools: Read, Grep, Glob, Write, Edit
-model: sonnet
+model: inherit
 color: cyan
 skills:
   - write-requirements

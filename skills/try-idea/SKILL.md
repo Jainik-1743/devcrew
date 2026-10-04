@@ -4,6 +4,9 @@ description: Run a small time-boxed throwaway experiment to answer one technical
 ---
 # Try idea (spike)
 
+> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+
+
 1. Write the question as one line with a yes/no or number answer:
    "Can Supabase realtime push 500 updates/s to 100 clients?"
 2. Time-box: state the limit (default 30 minutes of work).

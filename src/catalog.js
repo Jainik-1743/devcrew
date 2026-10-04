@@ -125,3 +125,16 @@ export function connect(catalog, picked) {
 
 /** Rough token estimate (~4 chars/token) — good enough to compare budgets. */
 export const tokens = (text) => Math.ceil(text.length / 4);
+
+/**
+ * The hand-off line a skill carries so it always runs inside its agent: from the main chat the
+ * model delegates to that agent; tools without subagents follow the role-<name> skill instead.
+ * Returns null for commands and skills no agent owns. The validator checks every SKILL.md has it.
+ */
+export function ownerLine(catalog, skill) {
+  const owners = [...catalog.agents.values()].filter((a) => a.skills.includes(skill)).map((a) => a.name);
+  if (!owners.length) return null;
+  const agents = owners.map((a) => `**${a}**`).join(' or ');
+  const roles = owners.map((a) => '`role-' + a + '`').join(' or ');
+  return `> Owner: ${agents} agent. Not running as it? Delegate this skill to it (no subagents: follow ${roles}). Inside it, just do the steps.`;
+}

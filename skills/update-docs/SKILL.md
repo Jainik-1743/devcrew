@@ -4,6 +4,9 @@ description: Update README and docs to match what was actually built: setup, env
 ---
 # Update docs
 
+> Owner: **doc-writer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-doc-writer`). Inside it, just do the steps.
+
+
 1. Diff since the last release: `git diff <last-tag>..HEAD --stat` and the release notes.
 2. Check each doc for drift and fix it:
    - README: what it is, setup steps, commands, env vars (must match `.env.example`).
@@ -12,6 +15,6 @@ description: Update README and docs to match what was actually built: setup, env
    - `CLAUDE.md`: commands and conventions still correct; ≤60 lines.
 3. Run every documented command once; mark anything you couldn't run as "not verified".
 4. Delete outdated text instead of adding caveats.
-5. If `project/architecture.md` exists, finish by running `map-codebase` in refresh mode.
+5. If `project/architecture.md` exists, end by asking **codebase-expert** to refresh the map (`map-codebase`).
 
 Output: list of files changed with one line each on what was corrected.

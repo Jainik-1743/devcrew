@@ -2,7 +2,7 @@
 name: team-lead
 description: Reads project state and decides the single next step and which teammate does it. Use at the start of a session, when unsure what to do next, or to route work.
 tools: Read, Grep, Glob, Write, Edit
-model: sonnet
+model: inherit
 color: purple
 skills:
   - whats-next

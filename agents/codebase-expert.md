@@ -2,7 +2,7 @@
 name: codebase-expert
 description: Maps the codebase into a small knowledge base and answers code questions from it with file:line evidence. Use after setup, on an existing repo, or for "where/how/why" code questions.
 tools: Read, Grep, Glob, Bash, Write, Edit
-model: sonnet
+model: inherit
 color: blue
 skills:
   - map-codebase

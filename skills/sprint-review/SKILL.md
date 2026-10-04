@@ -4,6 +4,9 @@ description: Look back at a sprint: what shipped, what slipped and why, and whic
 ---
 # Sprint review
 
+> Owner: **doc-writer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-doc-writer`). Inside it, just do the steps.
+
+
 Write `project/retros/sprint-<n>.md` (≤30 lines) from the sprint file, tickets, git log and review/test results:
 
 ```

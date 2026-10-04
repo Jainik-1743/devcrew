@@ -6,6 +6,8 @@ argument-hint: <path to brief or pasted requirements>
 ---
 # /crew-start
 
+Agents run on whatever model this session uses. No subagent support (Codex, Cursor...)? Instead of delegating, follow the `role-<agent>` skill yourself.
+
 Requirements: $ARGUMENTS
 
 1. If `project/progress.md` is missing, create the `project/` files (progress, decisions, glossary, shared-questions, assumptions, handoffs/).

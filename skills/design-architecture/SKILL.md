@@ -4,6 +4,9 @@ description: Choose the tech stack and design the system's main components, data
 ---
 # Design architecture
 
+> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+
+
 Write `docs/tech/architecture.md` (≤150 lines):
 
 1. **Drivers** — the 5–8 requirements that shape the design (users, load, latency, privacy, integrations, budget, team skills, deadline).

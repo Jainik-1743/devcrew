@@ -6,6 +6,8 @@ argument-hint: <what changed in the requirements>
 ---
 # /crew-change
 
+Agents run on whatever model this session uses. No subagent support (Codex, Cursor...)? Instead of delegating, follow the `role-<agent>` skill yourself.
+
 Change: $ARGUMENTS
 
 1. Delegate to the **analyst** agent with the `handle-change` skill and the change text.

@@ -4,6 +4,9 @@ description: Connect GitHub, the ticket tracker, Slack, Figma, error tracking an
 ---
 # Connect tools
 
+> Owner: **setup-engineer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-setup-engineer`). Inside it, just do the steps.
+
+
 1. Detect what's available: MCP servers in this session, CLIs (`gh auth status`, `jira`, `linear`, `vercel`, ...), env vars.
 2. For each needed tool (from `docs/tech/architecture.md` and the brief), choose the cheapest working path:
    MCP server > official CLI > REST API with a token > local files fallback.

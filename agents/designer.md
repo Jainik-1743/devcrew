@@ -2,7 +2,7 @@
 name: designer
 description: Plans user flows, screen lists, wireframes and the design system, then checks UX and accessibility. Use after an FRD section is approved and before UI is built.
 tools: Read, Grep, Glob, Write, Edit, Bash
-model: sonnet
+model: inherit
 color: pink
 skills:
   - map-user-flows

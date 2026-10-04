@@ -6,6 +6,8 @@ argument-hint: [optional note, e.g. 'approved' or an answer]
 ---
 # /crew-next
 
+Agents run on whatever model this session uses. No subagent support (Codex, Cursor...)? Instead of delegating, follow the `role-<agent>` skill yourself.
+
 User note: $ARGUMENTS
 
 1. If the note approves or answers something, record it first (approval → `project/decisions.md`; answer → the question file + remove from Open questions).

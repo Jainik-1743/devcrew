@@ -4,6 +4,9 @@ description: List what to test for a feature: happy path, wrong input, empty dat
 ---
 # Write test plan
 
+> Owner: **tester** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-tester`). Inside it, just do the steps.
+
+
 Write `docs/tests/<KEY>-plan.md` — a table the tester can execute:
 
 | # | Area | Steps | Expected | Result |

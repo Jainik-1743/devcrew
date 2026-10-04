@@ -4,6 +4,9 @@ description: Review a code change against its ticket, FRD and project rules and 
 ---
 # Review code
 
+> Owner: **reviewer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-reviewer`). Inside it, just do the steps.
+
+
 1. Context: ticket, FRD section, `CLAUDE.md` rules, and the diff (`git diff main...HEAD`). Read changed files in full, plus callers when behaviour changes.
 2. Check in this order (`references/checklist.md`): acceptance checks → correctness/edge cases → tests → security → data/migrations → performance → design system → readability → docs.
 3. Verify every finding: point to the line, explain the failing scenario (input → wrong result). Drop anything you can't verify.

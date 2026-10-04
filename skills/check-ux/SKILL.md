@@ -4,6 +4,9 @@ description: Review screens against usability rules (clear labels, one main acti
 ---
 # Check UX
 
+> Owner: **designer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer`). Inside it, just do the steps.
+
+
 Check each screen against this list; record failures in `docs/design/review.md` as `screen | rule | problem | fix`.
 
 1. Clear purpose: a new user knows what the screen is for in 5 seconds.

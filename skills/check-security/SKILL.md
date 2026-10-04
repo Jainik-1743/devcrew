@@ -4,6 +4,9 @@ description: Check changed code for auth, permission, input, injection, secret a
 ---
 # Check security
 
+> Owner: **reviewer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-reviewer`). Inside it, just do the steps.
+
+
 Scope: the changed code and what it calls. For each item, state **pass** or a finding with file:line.
 
 1. **AuthN** — every new route/action requires login unless explicitly public.
