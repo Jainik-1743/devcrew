@@ -53,7 +53,7 @@ jobs:
         run: |
           npm pack --silent
           mkdir -p /tmp/smoke && cd /tmp/smoke
-          npx --yes --package="$GITHUB_WORKSPACE"/devcrew-*.tgz devcrew init -y --dry-run
+          npx --yes --package="$GITHUB_WORKSPACE"/devcrew-kit-*.tgz devcrew-kit init -y --dry-run
 
   # Single required check for branch protection: passes only if every job above passed.
   ci-passed:
