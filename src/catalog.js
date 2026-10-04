@@ -22,6 +22,11 @@ export function loadCatalog(root = KIT_ROOT) {
       kind: 'skill',
       description: data.description || '',
       command: name in kit.commands,
+      // Claude Code routing: context "fork" runs the skill as `agent` on `model`; otherwise it runs inline.
+      context: data.context || 'inline',
+      agent: data.agent || null,
+      model: data.model || 'inherit',
+      effort: data.effort || null,
       dir: path.join(skillsDir, name),
     });
   }
@@ -36,6 +41,7 @@ export function loadCatalog(root = KIT_ROOT) {
       kind: 'agent',
       description: data.description || '',
       model: data.model || 'inherit',
+      effort: data.effort || null,
       skills: asList(data.skills),
       file: path.join(agentsDir, file),
       body,
@@ -127,14 +133,22 @@ export function connect(catalog, picked) {
 export const tokens = (text) => Math.ceil(text.length / 4);
 
 /**
- * The hand-off line a skill carries so it always runs inside its agent: from the main chat the
- * model delegates to that agent; tools without subagents follow the role-<name> skill instead.
- * Returns null for commands and skills no agent owns. The validator checks every SKILL.md has it.
+ * The owner line every agent-owned skill carries. In Claude Code a forked skill already runs as its
+ * agent (frontmatter context/agent/model), so the line is for other tools: follow the role-<name>
+ * skill instead. Inline skills run where they are invoked. Returns null for commands and skills no
+ * agent owns. The validator checks every SKILL.md has it.
  */
 export function ownerLine(catalog, skill) {
   const owners = [...catalog.agents.values()].filter((a) => a.skills.includes(skill)).map((a) => a.name);
   if (!owners.length) return null;
-  const agents = owners.map((a) => `**${a}**`).join(' or ');
+  const s = catalog.skills.get(skill);
   const roles = owners.map((a) => '`role-' + a + '`').join(' or ');
-  return `> Owner: ${agents} agent. Not running as it? Delegate this skill to it (no subagents: follow ${roles}). Inside it, just do the steps.`;
+  if (s?.context === 'fork') {
+    return `> Owner: **${s.agent}** agent (Claude Code runs this skill as it, on its model). No subagents: follow ${roles}. Inside the agent, just do the steps.`;
+  }
+  const agents = owners.map((a) => `**${a}**`).join(', ');
+  return `> Used by: ${agents}. Runs where it is invoked (needs the current context); just do the steps.`;
 }
+
+/** Frontmatter keys only Claude Code understands; stripped for other tools. */
+export const CLAUDE_ONLY_KEYS = ['context', 'agent', 'model', 'effort', 'background'];

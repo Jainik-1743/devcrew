@@ -1,10 +1,15 @@
 ---
 name: build-design-system
 description: Define design tokens and shared components (color, type, spacing, buttons, forms, cards, tables, modals) with light and dark mode. Use once per project before building UI.
+context: fork
+agent: designer
+model: sonnet
+effort: medium
+background: false
 ---
 # Build design system
 
-> Owner: **designer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer`). Inside it, just do the steps.
+> Owner: **designer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-designer`. Inside the agent, just do the steps.
 
 
 Outputs: `docs/design/tokens.css` (or the stack's equivalent, e.g. Tailwind theme) + `docs/design/design-system.md`.

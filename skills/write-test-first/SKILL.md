@@ -1,10 +1,15 @@
 ---
 name: write-test-first
 description: Write a failing test from each acceptance check, make it pass with minimal code, then refactor. Use when implementing any ticket or behaviour change.
+context: fork
+agent: developer
+model: sonnet
+effort: high
+background: false
 ---
 # Write test first (red → green → refactor)
 
-> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+> Owner: **developer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-developer`. Inside the agent, just do the steps.
 
 
 For each acceptance check in the ticket, in order:

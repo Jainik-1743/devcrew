@@ -1,10 +1,15 @@
 ---
 name: answer-codebase-question
 description: Answer questions about the codebase using the project knowledge base first (memory, modules, architecture), then verify in code and cite file:line. Use for "where/how/why does X work" questions about this project.
+context: fork
+agent: codebase-expert
+model: sonnet
+effort: medium
+background: false
 ---
 # Answer codebase question
 
-> Owner: **codebase-expert** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-codebase-expert`). Inside it, just do the steps.
+> Owner: **codebase-expert** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-codebase-expert`. Inside the agent, just do the steps.
 
 
 1. **Look up first** (cheap): `project/memory.md` (Q&A, gotchas) → `project/modules.md` (where) → `project/architecture.md` (how it fits).

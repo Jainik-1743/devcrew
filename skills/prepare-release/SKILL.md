@@ -1,10 +1,14 @@
 ---
 name: prepare-release
 description: Check every ticket meets the Done rules, open the PR with the template, write release notes and verify CI and the deploy. Use when sprint work is ready to ship.
+context: fork
+agent: release-manager
+model: haiku
+background: false
 ---
 # Prepare release
 
-> Owner: **release-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-release-manager`). Inside it, just do the steps.
+> Owner: **release-manager** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-release-manager`. Inside the agent, just do the steps.
 
 
 1. **Done gate** — for each ticket: checks pass · tests added · reviewer approved · tester passed · docs updated. Any miss → stop and list it.

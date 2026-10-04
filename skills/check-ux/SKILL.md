@@ -1,10 +1,15 @@
 ---
 name: check-ux
 description: Review screens against usability rules (clear labels, one main action, helpful errors, states, undo, consistent wording). Use after wireframes or UI are built.
+context: fork
+agent: designer
+model: sonnet
+effort: medium
+background: false
 ---
 # Check UX
 
-> Owner: **designer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer`). Inside it, just do the steps.
+> Owner: **designer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-designer`. Inside the agent, just do the steps.
 
 
 Check each screen against this list; record failures in `docs/design/review.md` as `screen | rule | problem | fix`.

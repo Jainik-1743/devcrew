@@ -1,10 +1,14 @@
 ---
 name: status-report
 description: "Write a short plain-language status report for stakeholders (team, manager, product owner or client): done, next, decisions needed and risks. Use at the end of each week or sprint."
+context: fork
+agent: release-manager
+model: haiku
+background: false
 ---
 # Status report
 
-> Owner: **release-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-release-manager`). Inside it, just do the steps.
+> Owner: **release-manager** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-release-manager`. Inside the agent, just do the steps.
 
 
 Write `docs/reports/status-YYYY-MM-DD.md` from progress, closed tickets and open questions:

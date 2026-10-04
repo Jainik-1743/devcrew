@@ -6,7 +6,7 @@ argument-hint: <path to brief or pasted requirements>
 ---
 # /crew-start
 
-Agents run on whatever model this session uses. No subagent support (Codex, Cursor...)? Instead of delegating, follow the `role-<agent>` skill yourself.
+Each agent runs on the model set in its file (opus for hard thinking, haiku for simple work): when delegating, never pass a model override. No subagent support (Codex, Cursor...)? Instead of delegating, follow the `role-<agent>` skill yourself.
 
 Requirements: $ARGUMENTS
 

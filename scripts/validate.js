@@ -6,7 +6,8 @@ import { loadCatalog, KIT_ROOT, tokens, ownerLine } from '../src/catalog.js';
 import { parseFrontmatter } from '../src/frontmatter.js';
 
 const LIMITS = { skillLines: 60, agentLines: 60, descriptionChars: 220, alwaysLoadedTokens: 3500 };
-const MODELS = ['haiku', 'sonnet', 'opus', 'fable', 'inherit'];
+const MODELS = ['haiku', 'sonnet', 'opus', 'fable'];
+const EFFORTS = ['low', 'medium', 'high', 'xhigh', 'max'];
 const errors = [];
 const err = (where, msg) => errors.push(`${where}: ${msg}`);
 
@@ -45,6 +46,19 @@ for (const s of catalog.skills.values()) {
   if (s.command && data['disable-model-invocation'] !== 'true') err(where, 'commands must set disable-model-invocation: true');
   const owner = ownerLine(catalog, s.name);
   if (owner && !text.includes(owner)) err(where, `missing or stale owner line; expected:\n    ${owner}`);
+  // Routing: a forked skill runs as one of its owner agents on an explicit model; an inline one sets none
+  // (an inline model override would switch the caller's model for the rest of its turn).
+  const owners = [...catalog.agents.values()].filter((a) => a.skills.includes(s.name)).map((a) => a.name);
+  if (s.context === 'fork') {
+    if (s.command) err(where, 'commands run in the main chat; do not set context: fork');
+    if (!owners.includes(s.agent)) err(where, `agent "${s.agent}" must be one of its owners: ${owners.join(', ')}`);
+    if (!MODELS.includes(s.model)) err(where, `forked skill needs model: one of ${MODELS.join(', ')}`);
+    if (data.background !== 'false') err(where, 'forked skill must set background: false (wait for the result, full tool set)');
+  } else {
+    if (s.context !== 'inline') err(where, `context must be fork or omitted, not "${s.context}"`);
+    for (const k of ['agent', 'model', 'effort', 'background']) if (data[k] !== undefined) err(where, `inline skill must not set ${k}`);
+  }
+  if (s.effort && !EFFORTS.includes(s.effort)) err(where, `effort must be one of ${EFFORTS.join(', ')}`);
 }
 
 for (const a of catalog.agents.values()) {
@@ -55,7 +69,8 @@ for (const a of catalog.agents.values()) {
   if (data.name !== a.name) err(where, 'frontmatter name must equal file name');
   if (!data.description) err(where, 'missing description');
   if (data.description?.length > LIMITS.descriptionChars) err(where, `description too long (${data.description.length})`);
-  if (!MODELS.includes(a.model)) err(where, `model must be one of ${MODELS.join(', ')}`);
+  if (!MODELS.includes(a.model)) err(where, `model must be one of ${MODELS.join(', ')} (pick by how hard the work is; not inherit)`);
+  if (a.effort && !EFFORTS.includes(a.effort)) err(where, `effort must be one of ${EFFORTS.join(', ')}`);
   if (!data.tools) err(where, 'set tools explicitly (least privilege)');
   if (text.split('\n').length > LIMITS.agentLines) err(where, `${text.split('\n').length} lines > ${LIMITS.agentLines}`);
   for (const s of a.skills) if (!catalog.skills.has(s)) err(where, `unknown skill "${s}"`);

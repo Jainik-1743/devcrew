@@ -1,10 +1,15 @@
 ---
 name: map-user-flows
 description: List user types and their goals and draw each journey step by step as a diagram. Use before wireframing or when a feature's user journey is unclear.
+context: fork
+agent: designer
+model: sonnet
+effort: medium
+background: false
 ---
 # Map user flows
 
-> Owner: **designer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer`). Inside it, just do the steps.
+> Owner: **designer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-designer`. Inside the agent, just do the steps.
 
 
 Write `docs/design/flows.md`:

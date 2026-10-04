@@ -1,10 +1,15 @@
 ---
 name: handle-change
 description: Assess a requirement change and show its impact on specs, design, tickets, code and timeline before accepting it. Use when requirements change or new ones are added mid-project.
+context: fork
+agent: analyst
+model: opus
+effort: high
+background: false
 ---
 # Handle change
 
-> Owner: **analyst** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst`). Inside it, just do the steps.
+> Owner: **analyst** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-analyst`. Inside the agent, just do the steps.
 
 
 1. Restate the change in one sentence; ask ≤3 question cards if it is ambiguous.

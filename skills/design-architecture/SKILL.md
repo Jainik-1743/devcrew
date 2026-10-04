@@ -1,10 +1,15 @@
 ---
 name: design-architecture
 description: Choose the tech stack and design the system's main components, data flow and deployment with explicit trade-offs. Use when starting a project or making a major technical change.
+context: fork
+agent: architect
+model: opus
+effort: high
+background: false
 ---
 # Design architecture
 
-> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+> Owner: **architect** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-architect`. Inside the agent, just do the steps.
 
 
 Write `docs/tech/architecture.md` (≤150 lines):

@@ -1,10 +1,14 @@
 ---
 name: estimate-tickets
 description: Size each ticket S or M and split anything larger. Use after tickets are created and before sprint planning.
+context: fork
+agent: project-manager
+model: haiku
+background: false
 ---
 # Estimate tickets
 
-> Owner: **project-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-project-manager`). Inside it, just do the steps.
+> Owner: **project-manager** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-project-manager`. Inside the agent, just do the steps.
 
 
 Sizes: **S** < half a day · **M** about a day · **L** = must split (never stays L).

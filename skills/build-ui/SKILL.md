@@ -1,10 +1,15 @@
 ---
 name: build-ui
 description: Turn approved wireframes into production UI code using the design system tokens and all five states. Use when a ticket includes screens or components.
+context: fork
+agent: developer
+model: sonnet
+effort: high
+background: false
 ---
 # Build UI
 
-> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+> Owner: **developer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-developer`. Inside the agent, just do the steps.
 
 
 Inputs: ticket, approved wireframe, `docs/design/design-system.md`, tokens.

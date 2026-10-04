@@ -1,10 +1,15 @@
 ---
 name: review-code
 description: Review a code change against its ticket, FRD and project rules and report verified, ranked findings with file:line and fixes. Use after a ticket is implemented or for any pull request.
+context: fork
+agent: reviewer
+model: opus
+effort: high
+background: false
 ---
 # Review code
 
-> Owner: **reviewer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-reviewer`). Inside it, just do the steps.
+> Owner: **reviewer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-reviewer`. Inside the agent, just do the steps.
 
 
 1. Context: ticket, FRD section, `CLAUDE.md` rules, and the diff (`git diff main...HEAD`). Read changed files in full, plus callers when behaviour changes.

@@ -1,10 +1,14 @@
 ---
 name: create-tickets
 description: Split an approved FRD section into epics and small vertical story, task and bug tickets using the standard templates. Use when specs are approved and work needs planning.
+context: fork
+agent: project-manager
+model: haiku
+background: false
 ---
 # Create tickets
 
-> Owner: **project-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-project-manager`). Inside it, just do the steps.
+> Owner: **project-manager** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-project-manager`. Inside the agent, just do the steps.
 
 
 From ONE approved FRD section → `docs/tickets/<KEY>.md` (local IDs `T-001` until synced).

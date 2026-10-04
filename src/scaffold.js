@@ -37,7 +37,7 @@ export const RULES_BLOCK = `${BLOCK_START}
 - Questions about the code: read \`project/memory.md\` + \`project/modules.md\` first, then verify in code (skill: answer-codebase-question). No map yet → \`/map-codebase\`.
 - Never say "done" without showing test, lint and type-check output (skill: confirm-done).
 - Approval gates: spec list, each FRD section, designs, tech plan, sprint, release.
-- A skill with an "Owner:" line runs inside that agent: delegate it there instead of running it in the main chat.
+- Skills with an "Owner:" line run inside that agent, on the model set for that work (Claude Code does this automatically). When you delegate with the Agent tool, never pass a model: the agent file sets it.
 - Subagents return <= 10 lines + file paths, never full file dumps.
 ${BLOCK_END}`;
 

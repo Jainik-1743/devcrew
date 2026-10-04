@@ -1,10 +1,15 @@
 ---
 name: design-api
 description: Design API endpoints with request, response, errors, auth and pagination in a consistent style. Use before building backend endpoints or integrations.
+context: fork
+agent: architect
+model: opus
+effort: high
+background: false
 ---
 # Design API
 
-> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+> Owner: **architect** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-architect`. Inside the agent, just do the steps.
 
 
 Write `docs/tech/api.md` (or an OpenAPI file if the stack generates docs from it):

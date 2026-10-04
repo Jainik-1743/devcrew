@@ -4,7 +4,7 @@ description: Record a decision with its reason and rejected alternatives as one 
 ---
 # Log decision
 
-> Owner: **analyst** or **architect** or **spec-writer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst` or `role-architect` or `role-spec-writer`). Inside it, just do the steps.
+> Used by: **analyst**, **architect**, **spec-writer**. Runs where it is invoked (needs the current context); just do the steps.
 
 
 Append one line to `project/decisions.md`:

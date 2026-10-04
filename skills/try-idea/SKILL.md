@@ -1,10 +1,15 @@
 ---
 name: try-idea
 description: Run a small time-boxed throwaway experiment to answer one technical unknown, record the answer, then delete the code. Use when a design decision depends on something unproven.
+context: fork
+agent: architect
+model: opus
+effort: high
+background: false
 ---
 # Try idea (spike)
 
-> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+> Owner: **architect** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-architect`. Inside the agent, just do the steps.
 
 
 1. Write the question as one line with a yes/no or number answer:

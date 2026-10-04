@@ -1,10 +1,15 @@
 ---
 name: ask-questions
 description: Find gaps in requirements and ask about them in small rounds of question cards, each with a recommended answer and a default. Use when requirements are unclear or before writing a spec.
+context: fork
+agent: analyst
+model: opus
+effort: high
+background: false
 ---
 # Ask questions
 
-> Owner: **analyst** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst`). Inside it, just do the steps.
+> Owner: **analyst** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-analyst`. Inside the agent, just do the steps.
 
 
 ## Before asking
@@ -24,7 +29,8 @@ Record answers in the question file. Unanswered by the deadline → default, log
 `project/assumptions.md`. Stop when a round has no new BLOCKER/IMPORTANT gaps.
 
 ## Asking as multiple choice
-Subagents can't ask the user. The analyst writes the cards and returns their IDs; the **main chat** asks them.
+Subagents can't ask the user. The analyst writes the cards to the question file and returns its path, the card IDs
+and this instruction for the **main chat**: ask them as below.
 With the AskUserQuestion tool: up to 4 cards per call, BLOCKER first, 2–4 options each, recommended option
 first with "(Recommended)" ("Other" is added automatically). Record each answer in its card, then ask the next batch.
 Without the tool: print cards as `A) / B) / C)` and accept replies like `Q3: B`.

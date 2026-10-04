@@ -1,10 +1,15 @@
 ---
 name: design-database
 description: "Design the data model: entities, fields, relations, constraints, indexes and migrations. Use after architecture is chosen and before building features that store data."
+context: fork
+agent: architect
+model: opus
+effort: high
+background: false
 ---
 # Design database
 
-> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+> Owner: **architect** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-architect`. Inside the agent, just do the steps.
 
 
 Write `docs/tech/database.md`:

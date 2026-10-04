@@ -1,10 +1,15 @@
 ---
 name: add-regression-test
 description: Turn every found bug into an automated test that fails before the fix and passes after. Use whenever a bug is found or fixed.
+context: fork
+agent: developer
+model: sonnet
+effort: high
+background: false
 ---
 # Add regression test
 
-> Owner: **developer** or **tester** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer` or `role-tester`). Inside it, just do the steps.
+> Owner: **developer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-developer` or `role-tester`. Inside the agent, just do the steps.
 
 
 1. Pick the cheapest level that reproduces the bug: unit < integration < e2e.

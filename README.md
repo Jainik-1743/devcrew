@@ -32,7 +32,7 @@ Both are excellent and inspired this kit, but they solve different problems.
 | | **mattpocock/skills** (aihero.dev) | **gstack** | **devcrew** |
 |---|---|---|---|
 | Built for | Improving one developer's workflow | Shipping a founder's idea fast | **The whole delivery cycle**: requirements → specs → design → build → review → test → release |
-| Unit of work | Skills only | Skills (persona prompts) | **Real subagents**, each with its own tools and preloaded skills, on your session model, plus skills |
+| Unit of work | Skills only | Skills (persona prompts) | **Real subagents**, each with its own tools, preloaded skills and **a model matched to the work** (opus to think, haiku for routine), plus skills |
 | Questions | Grilling, one question at a time | Forcing questions | **Question cards**: priority, options, *recommended answer and default*. Work never blocks waiting for an answer |
 | Large projects | One spec | One plan | **Just-in-time per-spec questions**: spec 1 is built while spec 2's questions are open |
 | Requirements | PRD → issues | Plan reviews | **FRD sections** with Given/When/Then checks, traced to tickets, tests and reviews |
@@ -46,7 +46,7 @@ Both are excellent and inspired this kit, but they solve different problems.
 
 ### What we improved
 
-1. **Agents, not only prompts.** Each role is a Claude Code subagent with **least-privilege tools** (the reviewer can't edit code), **the model you are on** (`model: inherit`, so switching with `/model` switches every agent too) and **only its own skills preloaded**. Each skill names its owner agent and hands itself to that agent, so `/review-code` runs as the read-only reviewer, not in your main chat. The work runs in the agent's own context window, so your main conversation stays small.
+1. **Agents, not only prompts.** Each role is a Claude Code subagent with **least-privilege tools** (the reviewer can't edit code), **a model chosen for its work** (opus for requirements, architecture and review; sonnet for building and testing; haiku for tickets, docs and release notes) and **only its own skills preloaded**. Each skill is routed to its agent (`context: fork` + `agent:` + `model:`), so `/review-code` runs as the read-only reviewer on opus and `/create-tickets` runs as the project manager on haiku, whatever model your main chat uses. The work runs in the agent's own context window, so your main conversation stays small.
 2. **A codebase memory that stays true.** `map-codebase` writes `architecture.md`, `modules.md`, `memory.md` and `archive.md`, each stamped with a git commit. Refreshes only re-read what changed since then. `answer-codebase-question` looks things up there first, verifies in code, cites `file:line`, and adds what it learned.
 3. **Never blocked on a person.** Every question has a recommended answer and a default. Unanswered questions take the default and are logged in `project/assumptions.md`, so nothing is silently guessed.
 4. **Deterministic routing.** `whats-next` is a fixed state → (action, owner) table. `/crew-next` always does exactly one step.
@@ -178,21 +178,23 @@ Every skill can also be called directly, e.g. `/create-tickets` or `/fix-bug`.
 
 ### Crew
 
-| Agent | Job | Skills |
-|---|---|---|
-| team-lead | Routes the next step | whats-next, track-progress, write-handoff |
-| analyst | Removes ambiguity | ask-questions, make-questionnaire, define-terms, handle-change, log-decision |
-| spec-writer | FRD sections | write-requirements, write-acceptance, log-decision |
-| designer | Flows, wireframes, design system | map-user-flows, make-wireframes, build-design-system, check-ux, check-accessibility |
-| architect | Stack, DB, API | design-architecture, design-database, design-api, try-idea, log-decision |
-| setup-engineer | Project and tool setup | setup-project, connect-tools, check-setup |
-| codebase-expert | Codebase map and Q&A | map-codebase, answer-codebase-question |
-| project-manager | Tickets and sprints | create-tickets, estimate-tickets, sync-tickets, plan-sprint |
-| developer | Builds tickets with TDD | write-test-first, build-step-by-step, build-ui, fix-bug, apply-feedback, add-regression-test, confirm-done |
-| reviewer | Read-only code and security review | review-code, check-security |
-| tester | Tests like a user | write-test-plan, test-like-user, add-regression-test, check-accessibility |
-| release-manager | PR, notes, updates | prepare-release, send-update, status-report |
-| doc-writer | Docs and retros | update-docs, sprint-review |
+| Agent | Model | Job | Skills |
+|---|---|---|---|
+| team-lead | sonnet · low | Routes the next step | whats-next, track-progress, write-handoff |
+| analyst | opus · high | Removes ambiguity | ask-questions, make-questionnaire, define-terms, handle-change, log-decision |
+| spec-writer | sonnet · medium | FRD sections | write-requirements, write-acceptance, log-decision |
+| designer | sonnet · medium | Flows, wireframes, design system | map-user-flows, make-wireframes, build-design-system, check-ux, check-accessibility |
+| architect | opus · high | Stack, DB, API | design-architecture, design-database, design-api, try-idea, log-decision |
+| setup-engineer | sonnet · medium | Project and tool setup | setup-project, connect-tools, check-setup |
+| codebase-expert | sonnet · medium | Codebase map and Q&A | map-codebase, answer-codebase-question |
+| project-manager | haiku | Tickets and sprints | create-tickets, estimate-tickets, sync-tickets, plan-sprint |
+| developer | sonnet · high | Builds tickets with TDD | write-test-first, build-step-by-step, build-ui, fix-bug, apply-feedback, add-regression-test, confirm-done |
+| reviewer | opus · high | Read-only code and security review | review-code, check-security |
+| tester | sonnet · medium | Tests like a user | write-test-plan, test-like-user, add-regression-test, check-accessibility |
+| release-manager | haiku | PR, notes, updates | prepare-release, send-update, status-report |
+| doc-writer | haiku | Docs and retros | update-docs, sprint-review |
+
+A skill runs on its agent's model unless the work needs a different one: `fix-bug` uses opus (root causes are hard), `define-terms` uses sonnet and `make-questionnaire` uses haiku. `track-progress`, `log-decision`, `write-handoff`, `confirm-done` and `build-step-by-step` run inline on the caller's model, because they need the current conversation. See any item with `npx devcrew-kit info <name>`.
 
 ---
 
@@ -206,7 +208,7 @@ Every skill can also be called directly, e.g. `/create-tickets` or `/fix-bug`.
 | Each agent preloads only its own 2–5 skills | No agent carries the whole kit |
 | Agents return ≤10 lines + file paths | The main conversation doesn't fill with tool output |
 | Small state files (progress ≤40 lines, handoffs, archive) | New sessions read 2 files instead of chat history |
-| Agents inherit your session model | Pick a cheaper model with `/model` and the whole crew follows; pin one agent by editing its `model:` (updates keep your edit), or set `CLAUDE_CODE_SUBAGENT_MODEL` for all |
+| Each skill runs on the model its work needs | A strong main-chat model is not spent on routine work: tickets, estimates, docs and release notes run on haiku. Change one by editing the skill's or agent's `model:` (updates keep your edit) |
 
 Check it yourself with `npx devcrew-kit tokens`.
 
@@ -249,7 +251,7 @@ npm pack --dry-run   # see what will be published
 npx changeset        # describe your change for the next release
 ```
 
-The validator enforces: the folder name matches the `name` field, kebab-case names, short one- or two-sentence descriptions, skills ≤60 lines, every `references/` and `scripts/` file mentioned actually exists, every agent sets `tools` and a valid `model`, every skill is used by an agent and carries its owner line, presets and commands resolve, and the plugin version matches the package version.
+The validator enforces: the folder name matches the `name` field, kebab-case names, short one- or two-sentence descriptions, skills ≤60 lines, every `references/` and `scripts/` file mentioned actually exists, every agent sets `tools` and an explicit `model` (not `inherit`), every forked skill runs as one of its owner agents on an explicit model with `background: false`, inline skills set no model, every skill is used by an agent and carries its owner line, presets and commands resolve, and the plugin version matches the package version.
 
 ### Versioning
 

@@ -1,10 +1,14 @@
 ---
 name: update-docs
 description: "Update README and docs to match what was actually built: setup, env vars, commands, API and feature status. Use after a release or when behaviour changes."
+context: fork
+agent: doc-writer
+model: haiku
+background: false
 ---
 # Update docs
 
-> Owner: **doc-writer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-doc-writer`). Inside it, just do the steps.
+> Owner: **doc-writer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-doc-writer`. Inside the agent, just do the steps.
 
 
 1. Diff since the last release: `git diff <last-tag>..HEAD --stat` and the release notes.

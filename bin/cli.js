@@ -215,6 +215,7 @@ async function main() {
         any = true;
         console.log(c.d(`${target}: ${r.from} → ${catalog.version}`));
         printInstall(r, args);
+        if (r.rules) console.log(`  ${c.d('updated rules block in')} ${r.rules}`);
       }
       if (!any) console.log(`Nothing installed at ${where(scope)} scope. Run ${c.c('npx devcrew-kit init')}`);
       return;
@@ -285,7 +286,8 @@ function info(catalog, name) {
   if (!name) fail('info needs a name');
   const a = catalog.agents.get(name);
   if (a) {
-    console.log(`${c.b(a.name)} ${c.d(`agent · model ${a.model}`)}\n${a.description}\nskills: ${a.skills.join(', ')}`);
+    const effort = a.effort ? `, effort ${a.effort}` : '';
+    console.log(`${c.b(a.name)} ${c.d(`agent · model ${a.model}${effort}`)}\n${a.description}\nskills: ${a.skills.join(', ')}`);
     return;
   }
   const s = catalog.skills.get(name);
@@ -294,6 +296,8 @@ function info(catalog, name) {
   const refs = fs.existsSync(`${s.dir}/references`) ? fs.readdirSync(`${s.dir}/references`) : [];
   console.log(`${c.b(s.name)} ${c.d(s.command ? 'command' : 'skill')}\n${s.description}`);
   if (users.length) console.log(`used by: ${users.join(', ')}`);
+  if (s.context === 'fork') console.log(`runs as: ${s.agent} agent · model ${s.model}${s.effort ? `, effort ${s.effort}` : ''}`);
+  else if (!s.command) console.log('runs: inline, on the caller\'s model');
   if (refs.length) console.log(`references (loaded on demand): ${refs.join(', ')}`);
 }
 
