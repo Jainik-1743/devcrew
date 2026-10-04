@@ -2,6 +2,14 @@
 
 Versions stay 0.0.x while the kit is being tested. 1.0.0 is cut once it is approved as stable.
 
+## 0.0.3
+
+### Patch Changes
+
+- [#4](https://github.com/Jainik-1743/devcrew/pull/4) [`0f57ef8`](https://github.com/Jainik-1743/devcrew/commit/0f57ef898a9a71d9c41253a2bf224a3825f2073f) Thanks [@Jainik-1743](https://github.com/Jainik-1743)! - Each skill now runs on the model its work needs, whatever model your main chat uses. Agents pick a model for their job instead of `inherit`: opus for the analyst, architect and reviewer; sonnet for building, design, testing and the codebase expert; haiku for tickets, docs and releases. Owned skills set `context: fork`, `agent:` and `model:`, so `/create-tickets` runs as the project manager on haiku and `/review-code` runs as the reviewer on opus. Context-dependent skills (`track-progress`, `log-decision`, `write-handoff`, `confirm-done`, `build-step-by-step`) stay inline. These routing keys are stripped for `--target agents`. `devcrew-kit info` shows where and on which model each item runs, and the validator rejects `inherit` and routing that doesn't match the owners.
+
+- [#4](https://github.com/Jainik-1743/devcrew/pull/4) [`0f57ef8`](https://github.com/Jainik-1743/devcrew/commit/0f57ef898a9a71d9c41253a2bf224a3825f2073f) Thanks [@Jainik-1743](https://github.com/Jainik-1743)! - `update` now refreshes the devcrew rules block in CLAUDE.md / AGENTS.md. Before, projects kept the rules from the version they first installed (for example, the "Owner:" delegation rule from 0.0.2 never reached them). Only the block is replaced; the rest of the file is kept.
+
 ## 0.0.2
 
 ### Patch Changes
