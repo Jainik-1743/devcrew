@@ -1,10 +1,14 @@
 ---
 name: plan-sprint
 description: Order tickets by dependencies and value into a sprint that fits capacity. Use when starting a sprint or re-planning after changes.
+context: fork
+agent: project-manager
+model: haiku
+background: false
 ---
 # Plan sprint
 
-> Owner: **project-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-project-manager`). Inside it, just do the steps.
+> Owner: **project-manager** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-project-manager`. Inside the agent, just do the steps.
 
 
 Write `project/sprint-<n>.md`:

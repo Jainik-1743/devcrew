@@ -1,10 +1,15 @@
 ---
 name: connect-tools
 description: Connect GitHub, the ticket tracker, Slack, Figma, error tracking and other tools, and record what is connected. Use during project setup or when a tool is missing.
+context: fork
+agent: setup-engineer
+model: sonnet
+effort: medium
+background: false
 ---
 # Connect tools
 
-> Owner: **setup-engineer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-setup-engineer`). Inside it, just do the steps.
+> Owner: **setup-engineer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-setup-engineer`. Inside the agent, just do the steps.
 
 
 1. Detect what's available: MCP servers in this session, CLIs (`gh auth status`, `jira`, `linear`, `vercel`, ...), env vars.

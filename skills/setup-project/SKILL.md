@@ -1,10 +1,15 @@
 ---
 name: setup-project
 description: "Create the code project to the team standard: feature folders, lint, types, tests, env, git rules, PR template, CI and CLAUDE.md. Use once the stack is approved."
+context: fork
+agent: setup-engineer
+model: sonnet
+effort: medium
+background: false
 ---
 # Setup project
 
-> Owner: **setup-engineer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-setup-engineer`). Inside it, just do the steps.
+> Owner: **setup-engineer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-setup-engineer`. Inside the agent, just do the steps.
 
 
 Use the framework's official scaffolder non-interactively, then apply the standard in `references/standard.md`.

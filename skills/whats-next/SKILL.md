@@ -1,10 +1,15 @@
 ---
 name: whats-next
 description: Pick the single next action and the right agent from project state using a fixed routing table. Use when deciding what to do next in the project.
+context: fork
+agent: team-lead
+model: sonnet
+effort: low
+background: false
 ---
 # Whats next
 
-> Owner: **team-lead** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-team-lead`). Inside it, just do the steps.
+> Owner: **team-lead** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-team-lead`. Inside the agent, just do the steps.
 
 
 Input: `project/progress.md` (+ newest handoff). Do not read anything else unless a rule below needs it.

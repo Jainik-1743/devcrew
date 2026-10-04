@@ -1,10 +1,15 @@
 ---
 name: fix-bug
 description: Reproduce a bug, find the real root cause, add a failing test, fix it and verify. Use for any bug report, failing test or unexpected behaviour.
+context: fork
+agent: developer
+model: opus
+effort: high
+background: false
 ---
 # Fix bug
 
-> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+> Owner: **developer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-developer`. Inside the agent, just do the steps.
 
 1. **Reproduce** exactly (steps from the bug report). Can't reproduce → gather more evidence (logs, data, env) before touching code.
 2. **Minimize** — smallest input/steps that still fail.

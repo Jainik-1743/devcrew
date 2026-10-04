@@ -1,10 +1,15 @@
 ---
 name: define-terms
 description: Build and maintain a glossary so everyone uses the same words for the same things. Use when new domain terms appear or words are used inconsistently.
+context: fork
+agent: analyst
+model: sonnet
+effort: medium
+background: false
 ---
 # Define terms
 
-> Owner: **analyst** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst`). Inside it, just do the steps.
+> Owner: **analyst** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-analyst`. Inside the agent, just do the steps.
 
 
 Maintain `project/glossary.md` as a table:

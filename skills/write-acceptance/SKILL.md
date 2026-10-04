@@ -1,10 +1,15 @@
 ---
 name: write-acceptance
 description: Write clear pass/fail Given/When/Then acceptance checks for requirements and tickets. Use when a rule, story or bug needs testable success criteria.
+context: fork
+agent: spec-writer
+model: sonnet
+effort: medium
+background: false
 ---
 # Write acceptance checks
 
-> Owner: **spec-writer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-spec-writer`). Inside it, just do the steps.
+> Owner: **spec-writer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-spec-writer`. Inside the agent, just do the steps.
 
 
 Format: `Given <state>, when <action>, then <observable result>` — tagged to the rule it proves (`R2:`).

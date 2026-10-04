@@ -4,7 +4,7 @@ description: Keep project/progress.md current and under 40 lines after every ste
 ---
 # Track progress
 
-> Owner: **team-lead** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-team-lead`). Inside it, just do the steps.
+> Used by: **team-lead**. Runs where it is invoked (needs the current context); just do the steps.
 
 
 Update `project/progress.md` in place. Keep it **under 40 lines** — it is read at the start of every session.

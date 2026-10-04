@@ -1,10 +1,14 @@
 ---
 name: sprint-review
 description: "Look back at a sprint: what shipped, what slipped and why, and which skill or rule to improve. Use at the end of each sprint."
+context: fork
+agent: doc-writer
+model: haiku
+background: false
 ---
 # Sprint review
 
-> Owner: **doc-writer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-doc-writer`). Inside it, just do the steps.
+> Owner: **doc-writer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-doc-writer`. Inside the agent, just do the steps.
 
 
 Write `project/retros/sprint-<n>.md` (≤30 lines) from the sprint file, tickets, git log and review/test results:

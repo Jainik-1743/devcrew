@@ -4,7 +4,7 @@ description: Make one small change, verify it, commit it, then take the next ste
 ---
 # Build step by step
 
-> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+> Used by: **developer**. Runs where it is invoked (needs the current context); just do the steps.
 
 
 1. Write the plan as ≤7 steps in the ticket file under `Plan:` — each step leaves the app working.

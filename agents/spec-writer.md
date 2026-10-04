@@ -2,7 +2,8 @@
 name: spec-writer
 description: Writes one FRD section at a time with testable Given/When/Then acceptance checks. Use after the analyst has answered a spec's questions.
 tools: Read, Grep, Glob, Write, Edit
-model: inherit
+model: sonnet
+effort: medium
 color: cyan
 skills:
   - write-requirements
@@ -21,6 +22,7 @@ The spec line from `docs/frd/00-spec-list.md`, answered question cards, `project
 4. Mark the section `Status: awaiting approval` at the top.
 
 ## Rules
+- Your skills are preloaded: follow their steps directly. Never call them with the Skill tool (that would start another agent).
 - One section per run. Target ≤120 lines per section; split modules that need more.
 - Use glossary words exactly. No technology choices (that's the architect's job) unless the requirements demand them.
 - Anything still unknown goes to "Open questions" with a default — never invent silent requirements.

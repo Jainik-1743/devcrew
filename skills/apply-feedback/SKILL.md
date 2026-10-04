@@ -1,10 +1,15 @@
 ---
 name: apply-feedback
 description: Fix review comments one by one, re-run checks, and reply to each finding until the review is clean. Use when a review returns changes needed.
+context: fork
+agent: developer
+model: sonnet
+effort: high
+background: false
 ---
 # Apply feedback
 
-> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+> Owner: **developer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-developer`. Inside the agent, just do the steps.
 
 
 1. List each Must-fix and Should-fix finding as a checkbox in the ticket under `Review round <n>:`.

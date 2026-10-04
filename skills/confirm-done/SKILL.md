@@ -4,7 +4,7 @@ description: Before claiming work is done, run tests, lint, type checks and buil
 ---
 # Confirm done
 
-> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+> Used by: **developer**. Runs where it is invoked (needs the current context); just do the steps.
 
 
 Run and paste the **real** final lines of each:

@@ -1,10 +1,15 @@
 ---
 name: check-security
 description: Check changed code for auth, permission, input, injection, secret and data-exposure problems. Use on every code change touching endpoints, auth, data or dependencies.
+context: fork
+agent: reviewer
+model: opus
+effort: high
+background: false
 ---
 # Check security
 
-> Owner: **reviewer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-reviewer`). Inside it, just do the steps.
+> Owner: **reviewer** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-reviewer`. Inside the agent, just do the steps.
 
 
 Scope: the changed code and what it calls. For each item, state **pass** or a finding with file:line.

@@ -1,10 +1,15 @@
 ---
 name: test-like-user
 description: Use the running app like a real user through the browser or API, follow the test plan and report bugs with evidence. Use after review approval and before release.
+context: fork
+agent: tester
+model: sonnet
+effort: medium
+background: false
 ---
 # Test like a user
 
-> Owner: **tester** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-tester`). Inside it, just do the steps.
+> Owner: **tester** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-tester`. Inside the agent, just do the steps.
 
 
 1. Start the app (or use the staging URL). Confirm it's the right build (commit hash / version).

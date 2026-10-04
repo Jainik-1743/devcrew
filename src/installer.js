@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { resolve } from './catalog.js';
+import { resolve, CLAUDE_ONLY_KEYS } from './catalog.js';
 import { PROJECT_FILES, upsertBlock, removeBlock } from './scaffold.js';
 
 export const MANIFEST = 'devcrew.json';
@@ -49,10 +49,14 @@ function listFiles(dir, prefix = '') {
 export function itemFiles(catalog, target, kind, name) {
   if (kind === 'skill') {
     const skill = catalog.skills.get(name);
-    return listFiles(skill.dir).map((rel) => ({
-      rel: toPosix(path.join('skills', name, rel)),
-      data: fs.readFileSync(path.join(skill.dir, rel)),
-    }));
+    const native = TARGETS[target].agents === 'native';
+    return listFiles(skill.dir).map((rel) => {
+      const data = fs.readFileSync(path.join(skill.dir, rel));
+      return {
+        rel: toPosix(path.join('skills', name, rel)),
+        data: native || rel !== 'SKILL.md' ? data : Buffer.from(stripKeys(data.toString('utf8'), CLAUDE_ONLY_KEYS)),
+      };
+    });
   }
   const agent = catalog.agents.get(name);
   if (TARGETS[target].agents === 'native') {
@@ -62,6 +66,14 @@ export function itemFiles(catalog, target, kind, name) {
     agent.body.trimEnd() +
     `\n\nSkills this role uses: ${agent.skills.map((s) => '`' + s + '`').join(', ')}.\n`;
   return [{ rel: `skills/role-${name}/SKILL.md`, data: Buffer.from(role) }];
+}
+
+/** Drop top-level frontmatter keys (e.g. Claude Code routing fields other tools don't understand). */
+export function stripKeys(text, keys) {
+  const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+  if (!fm) return text;
+  const kept = fm[1].split(/\r?\n/).filter((line) => !keys.some((k) => line.startsWith(`${k}:`)));
+  return `---\n${kept.join('\n')}\n---` + text.slice(fm[0].length);
 }
 
 function emptyManifest(catalog, scope, target) {
@@ -128,14 +140,18 @@ export function scaffoldProject(cwd, target) {
     fs.writeFileSync(dest, content);
     created.push(rel);
   }
+  if (refreshRules(cwd, target)) created.push(TARGETS[target].rulesFile);
+  return created;
+}
+
+/** Upsert the kit's rules block into the target's rules file. Returns true if the file changed. */
+export function refreshRules(cwd, target) {
   const rules = path.join(cwd, TARGETS[target].rulesFile);
   const before = fs.existsSync(rules) ? fs.readFileSync(rules, 'utf8') : '';
   const after = upsertBlock(before);
-  if (after !== before) {
-    fs.writeFileSync(rules, after);
-    created.push(TARGETS[target].rulesFile);
-  }
-  return created;
+  if (after === before) return false;
+  fs.writeFileSync(rules, after);
+  return true;
 }
 
 /**
@@ -217,6 +233,8 @@ export function update(catalog, opts) {
     report.stale.push(rel);
   }
   if (!dryRun) writeManifest(base, fresh);
+  // The rules block changes between versions too; refresh it (only the block, never the rest of the file).
+  if (!dryRun && scope === 'project' && refreshRules(cwd, target)) report.rules = TARGETS[target].rulesFile;
   report.from = from;
   return report;
 }

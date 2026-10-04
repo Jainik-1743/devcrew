@@ -1,10 +1,15 @@
 ---
 name: map-codebase
 description: Scan the codebase once into a small knowledge base (architecture, modules, memory, archive) so later questions skip re-reading code. Use after setup, on an existing repo, or to refresh.
+context: fork
+agent: codebase-expert
+model: sonnet
+effort: medium
+background: false
 ---
 # Map codebase
 
-> Owner: **codebase-expert** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-codebase-expert`). Inside it, just do the steps.
+> Owner: **codebase-expert** agent (Claude Code runs this skill as it, on its model). No subagents: follow `role-codebase-expert`. Inside the agent, just do the steps.
 
 
 Outputs in `project/` (templates: `references/templates.md`):

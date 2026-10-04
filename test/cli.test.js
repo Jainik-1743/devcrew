@@ -78,6 +78,34 @@ test('agents target converts agents into role skills', () => {
   assert.match(fs.readFileSync(path.join(s.cwd, 'AGENTS.md'), 'utf8'), /devcrew:start/);
 });
 
+test('owned skills route to their agent on an explicit model; inline ones keep the caller model', () => {
+  for (const a of catalog.agents.values()) assert.notEqual(a.model, 'inherit', `${a.name} must pick a model`);
+  assert.equal(catalog.agents.get('project-manager').model, 'haiku');
+  assert.equal(catalog.agents.get('reviewer').model, 'opus');
+
+  const mc = catalog.skills.get('map-codebase');
+  assert.deepEqual([mc.context, mc.agent, mc.model], ['fork', 'codebase-expert', 'sonnet']);
+  assert.equal(catalog.skills.get('create-tickets').model, 'haiku');
+  assert.equal(catalog.skills.get('fix-bug').model, 'opus');
+  const handoff = catalog.skills.get('write-handoff');
+  assert.deepEqual([handoff.context, handoff.model], ['inline', 'inherit']);
+  for (const s of catalog.skills.values()) if (s.command) assert.equal(s.context, 'inline', `${s.name} is a command`);
+});
+
+test('Claude routing keys stay for Claude Code and are stripped for other tools', () => {
+  const s = sandbox();
+  install(catalog, { scope: 'project', target: 'claude', names: ['codebase-expert'], ...s });
+  install(catalog, { scope: 'project', target: 'agents', names: ['codebase-expert'], ...s });
+  const claude = fs.readFileSync(path.join(s.cwd, '.claude/skills/map-codebase/SKILL.md'), 'utf8');
+  const other = fs.readFileSync(path.join(s.cwd, '.agents/skills/map-codebase/SKILL.md'), 'utf8');
+  assert.match(claude, /^context: fork$/m);
+  assert.match(claude, /^agent: codebase-expert$/m);
+  for (const k of ['context', 'agent', 'model', 'effort', 'background']) assert.doesNotMatch(other, new RegExp(`^${k}:`, 'm'));
+  const { data, body } = parseFrontmatter(other);
+  assert.equal(data.name, 'map-codebase');
+  assert.match(body, /role-codebase-expert/);
+});
+
 test('user-edited and foreign files are never overwritten without --force', () => {
   const s = sandbox();
   const base = path.join(s.cwd, '.claude');
@@ -96,6 +124,24 @@ test('user-edited and foreign files are never overwritten without --force', () =
 
   install(catalog, { scope: 'project', target: 'claude', names: ['developer'], force: true, ...s });
   assert.doesNotMatch(fs.readFileSync(edited, 'utf8'), /my rule/);
+});
+
+test('update refreshes an outdated rules block and keeps the rest of the file', () => {
+  const s = sandbox();
+  const opts = { scope: 'project', target: 'claude', ...s };
+  install(catalog, { ...opts, names: ['reviewer'] });
+  const rules = path.join(s.cwd, 'CLAUDE.md');
+  const old = upsertBlock('# My project\n', '<!-- devcrew:start -->\n## devcrew\n- old rule\n<!-- devcrew:end -->');
+  fs.writeFileSync(rules, old);
+
+  const u = update(catalog, opts);
+  assert.equal(u.rules, 'CLAUDE.md');
+  const text = fs.readFileSync(rules, 'utf8');
+  assert.match(text, /^# My project/);
+  assert.doesNotMatch(text, /old rule/);
+  assert.equal(text, upsertBlock(old));
+
+  assert.equal(update(catalog, opts).rules, undefined);
 });
 
 test('remove blocks skills still used by an agent, then cleans up fully', () => {
