@@ -27,7 +27,7 @@
       "skills": "*"
     },
     "core": {
-      "description": "Lean loop: requirements -> build -> review (5 agents)",
+      "description": "Lean loop: requirements -> build -> review (6 agents)",
       "agents": [
         "team-lead",
         "analyst",

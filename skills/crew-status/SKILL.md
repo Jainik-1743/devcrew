@@ -1,6 +1,6 @@
 ---
 name: crew-status
-description: Show where the project is: phase, current work, open questions, blockers and the next step, in under 15 lines.
+description: "Show where the project is: phase, current work, open questions, blockers and the next step, in under 15 lines."
 disable-model-invocation: true
 ---
 # /crew-status

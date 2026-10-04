@@ -1,6 +1,6 @@
 ---
 name: crew-change
-description: Handle a requirement change: show its impact on specs, designs, tickets, code and timeline before anything changes.
+description: "Handle a requirement change: show its impact on specs, designs, tickets, code and timeline before anything changes."
 disable-model-invocation: true
 argument-hint: <what changed in the requirements>
 ---

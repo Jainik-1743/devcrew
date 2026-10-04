@@ -1,6 +1,6 @@
 ---
 name: crew-start
-description: Start a new project from a requirements brief: set up project state, run the big-picture question round and propose the spec list.
+description: "Start a new project from a requirements brief: set up project state, run the big-picture question round and propose the spec list."
 disable-model-invocation: true
 argument-hint: <path to brief or pasted requirements>
 ---

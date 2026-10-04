@@ -194,7 +194,10 @@ async function main() {
     case 'rm':
     case 'uninstall': {
       if (!rest.length && !args.all) fail('remove needs names, or --all');
-      for (const target of targetsOf(args.target)) {
+      // Like update/doctor: every installed target unless one is named.
+      const installed = targetsOf(args.target || 'all').filter((t) => args.target || readManifest(baseDir({ scope, target: t })));
+      if (!installed.length) return console.log(`Nothing installed at ${where(scope)} scope.`);
+      for (const target of installed) {
         const r = remove(catalog, { ...opts, target, names: rest, all: args.all });
         console.log(`${c.g('✔')} ${c.b(r.base)} — removed ${r.removed.length} files`);
         for (const k of r.kept) console.log(`  ${c.y('kept')} ${k} ${c.d('(edited by you; --force to delete)')}`);

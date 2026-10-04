@@ -1,6 +1,6 @@
 ---
 name: setup-project
-description: Create the code project to the team standard: feature folders, lint, types, tests, env, git rules, PR template, CI and CLAUDE.md. Use once the stack is approved.
+description: "Create the code project to the team standard: feature folders, lint, types, tests, env, git rules, PR template, CI and CLAUDE.md. Use once the stack is approved."
 ---
 # Setup project
 

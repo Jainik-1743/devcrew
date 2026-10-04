@@ -58,7 +58,7 @@ export function itemFiles(catalog, target, kind, name) {
   if (TARGETS[target].agents === 'native') {
     return [{ rel: `agents/${name}.md`, data: fs.readFileSync(agent.file) }];
   }
-  const role = `---\nname: role-${name}\ndescription: Act as the ${name}. ${agent.description}\n---\n` +
+  const role = `---\nname: role-${name}\ndescription: ${JSON.stringify(`Act as the ${name}. ${agent.description}`)}\n---\n` +
     agent.body.trimEnd() +
     `\n\nSkills this role uses: ${agent.skills.map((s) => '`' + s + '`').join(', ')}.\n`;
   return [{ rel: `skills/role-${name}/SKILL.md`, data: Buffer.from(role) }];

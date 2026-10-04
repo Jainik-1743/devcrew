@@ -12,11 +12,26 @@ const err = (where, msg) => errors.push(`${where}: ${msg}`);
 
 const catalog = loadCatalog();
 
+// Claude Code reads frontmatter with a real YAML parser, which our small reader is more forgiving than.
+// Unquoted values containing ": " or " #", or starting with [ { (except list keys), break or change meaning there.
+const LIST_KEYS = new Set(['tools', 'skills']);
+function checkYaml(where, text) {
+  const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+  if (!fm) return err(where, 'missing frontmatter');
+  for (const line of fm[1].split(/\r?\n/)) {
+    const kv = /^([A-Za-z0-9_-]+):\s+(.+)$/.exec(line);
+    if (!kv || /^["']/.test(kv[2])) continue;
+    const [, key, value] = kv;
+    if (/: |\s#/.test(value) || (/^[[{]/.test(value) && !LIST_KEYS.has(key))) err(where, `quote the ${key} value (invalid or ambiguous YAML)`);
+  }
+}
+
 for (const s of catalog.skills.values()) {
   const file = path.join(s.dir, 'SKILL.md');
   const text = fs.readFileSync(file, 'utf8');
   const { data, body } = parseFrontmatter(text);
   const where = `skills/${s.name}`;
+  checkYaml(where, text);
   if (data.name !== s.name) err(where, `frontmatter name "${data.name}" must equal folder name`);
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(s.name)) err(where, 'name must be kebab-case');
   if (!data.description) err(where, 'missing description');
@@ -36,6 +51,7 @@ for (const a of catalog.agents.values()) {
   const text = fs.readFileSync(a.file, 'utf8');
   const { data } = parseFrontmatter(text);
   const where = `agents/${a.name}`;
+  checkYaml(where, text);
   if (data.name !== a.name) err(where, 'frontmatter name must equal file name');
   if (!data.description) err(where, 'missing description');
   if (data.description?.length > LIMITS.descriptionChars) err(where, `description too long (${data.description.length})`);
@@ -63,6 +79,16 @@ if (always > LIMITS.alwaysLoadedTokens) err('kit', `always-loaded descriptions ~
 
 const plugin = JSON.parse(fs.readFileSync(path.join(KIT_ROOT, '.claude-plugin/plugin.json'), 'utf8'));
 if (plugin.version !== catalog.version) err('.claude-plugin/plugin.json', `version ${plugin.version} != package ${catalog.version}`);
+
+// Changesets must name this package, or the Release workflow fails ("package not found").
+const pkgName = JSON.parse(fs.readFileSync(path.join(KIT_ROOT, 'package.json'), 'utf8')).name;
+const csDir = path.join(KIT_ROOT, '.changeset');
+for (const f of fs.existsSync(csDir) ? fs.readdirSync(csDir).filter((f) => f.endsWith('.md') && f !== 'README.md') : []) {
+  const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(fs.readFileSync(path.join(csDir, f), 'utf8'));
+  for (const m of (fm?.[1] || '').matchAll(/^["']?([^"':]+)["']?\s*:/gm)) {
+    if (m[1] !== pkgName) err(`.changeset/${f}`, `names package "${m[1]}", expected "${pkgName}"`);
+  }
+}
 
 if (errors.length) {
   console.error(`✖ ${errors.length} problem(s):\n  ` + errors.join('\n  '));

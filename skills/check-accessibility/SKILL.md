@@ -1,6 +1,6 @@
 ---
 name: check-accessibility
-description: Check screens for WCAG 2.2 AA: contrast, keyboard use, focus, labels, alt text, motion and screen-reader support. Use on new or changed UI.
+description: "Check screens for WCAG 2.2 AA: contrast, keyboard use, focus, labels, alt text, motion and screen-reader support. Use on new or changed UI."
 ---
 # Check accessibility (WCAG 2.2 AA)
 

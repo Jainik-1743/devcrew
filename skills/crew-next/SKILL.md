@@ -1,8 +1,8 @@
 ---
 name: crew-next
-description: Do the next step of the project: ask the team lead what's next, delegate it to the right agent, and update progress.
+description: "Do the next step of the project: ask the team lead what's next, delegate it to the right agent, and update progress."
 disable-model-invocation: true
-argument-hint: [optional note, e.g. 'approved' or an answer]
+argument-hint: "[optional note, e.g. 'approved' or an answer]"
 ---
 # /crew-next
 

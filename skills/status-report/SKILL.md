@@ -1,6 +1,6 @@
 ---
 name: status-report
-description: Write a short plain-language status report for stakeholders (team, manager, product owner or client): done, next, decisions needed and risks. Use at the end of each week or sprint.
+description: "Write a short plain-language status report for stakeholders (team, manager, product owner or client): done, next, decisions needed and risks. Use at the end of each week or sprint."
 ---
 # Status report
 

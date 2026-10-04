@@ -1,6 +1,6 @@
 ---
 name: sprint-review
-description: Look back at a sprint: what shipped, what slipped and why, and which skill or rule to improve. Use at the end of each sprint.
+description: "Look back at a sprint: what shipped, what slipped and why, and which skill or rule to improve. Use at the end of each sprint."
 ---
 # Sprint review
 

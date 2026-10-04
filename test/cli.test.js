@@ -185,3 +185,22 @@ test('connect links agents, skills and commands in both directions', () => {
   assert.deepEqual(connect(catalog, ['crew-start']).agents.sort(), ['analyst', 'team-lead']);
   assert.deepEqual(connect(catalog, ['nope']), { agents: [], skills: [], requiredBy: new Map() });
 });
+
+test('role skills keep valid frontmatter and point back to the agent', () => {
+  const s = sandbox();
+  install(catalog, { scope: 'project', target: 'agents', names: ['preset:full'], ...s });
+  for (const a of catalog.agents.values()) {
+    const text = fs.readFileSync(path.join(s.cwd, `.agents/skills/role-${a.name}/SKILL.md`), 'utf8');
+    const desc = /^description: (.*)$/m.exec(text)[1];
+    assert.ok(desc.startsWith('"'), `role-${a.name} description must be quoted YAML`);
+    assert.equal(JSON.parse(desc), `Act as the ${a.name}. ${a.description}`);
+  }
+});
+
+test('CLI remove defaults to every installed target', () => {
+  const s = sandbox();
+  run(['init', '-t', 'agents', '-y'], s);
+  assert.match(run(['remove', '--all'], s), /\.agents — removed \d+ files/);
+  assert.equal(fs.existsSync(path.join(s.cwd, '.agents/devcrew.json')), false);
+  assert.match(run(['remove', '--all'], s), /Nothing installed/);
+});

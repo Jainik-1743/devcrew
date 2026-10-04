@@ -1,6 +1,6 @@
 ---
 name: design-database
-description: Design the data model: entities, fields, relations, constraints, indexes and migrations. Use after architecture is chosen and before building features that store data.
+description: "Design the data model: entities, fields, relations, constraints, indexes and migrations. Use after architecture is chosen and before building features that store data."
 ---
 # Design database
 

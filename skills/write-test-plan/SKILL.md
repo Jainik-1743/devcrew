@@ -1,6 +1,6 @@
 ---
 name: write-test-plan
-description: List what to test for a feature: happy path, wrong input, empty data, slow network, permissions, devices and keyboard. Use before testing a ticket or feature.
+description: "List what to test for a feature: happy path, wrong input, empty data, slow network, permissions, devices and keyboard. Use before testing a ticket or feature."
 ---
 # Write test plan
 

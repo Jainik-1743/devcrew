@@ -1,6 +1,6 @@
 ---
 name: update-docs
-description: Update README and docs to match what was actually built: setup, env vars, commands, API and feature status. Use after a release or when behaviour changes.
+description: "Update README and docs to match what was actually built: setup, env vars, commands, API and feature status. Use after a release or when behaviour changes."
 ---
 # Update docs
 
