@@ -1,6 +1,6 @@
 {
   "name": "devcrew-kit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An AI dev crew for Claude Code and any Agent Skills tool: agents, skills and workflow commands that take requirements to a tested, released product. Install per project or globally with one npx command.",
   "keywords": [
     "agent-skills",

@@ -1,6 +1,6 @@
 {
   "name": "devcrew",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An AI dev crew of agents and skills that take requirements to a tested, released product, plus a codebase knowledge base.",
   "author": {
     "name": "Jainik Patel",
