@@ -4,6 +4,9 @@ description: Design the data model: entities, fields, relations, constraints, in
 ---
 # Design database
 
+> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+
+
 Write `docs/tech/database.md`:
 
 1. **ER diagram** (Mermaid `erDiagram`) for all entities in the FRD Data sections.

@@ -4,6 +4,9 @@ description: Turn open question cards into a clean fill-in document for whoever 
 ---
 # Make questionnaire
 
+> Owner: **analyst** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst`). Inside it, just do the steps.
+
+
 Input: open question cards. Output: `docs/questions/questionnaire-<date>.md` — plain language, no tech words.
 
 ```

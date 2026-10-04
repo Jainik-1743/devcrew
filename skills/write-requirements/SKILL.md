@@ -4,6 +4,9 @@ description: Write one FRD section using the standard template, in the project's
 ---
 # Write requirements
 
+> Owner: **spec-writer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-spec-writer`). Inside it, just do the steps.
+
+
 Write ONE section: `docs/frd/NN-<name>.md`, using `references/frd-section.md`.
 
 ## Rules

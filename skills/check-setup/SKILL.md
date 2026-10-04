@@ -4,6 +4,9 @@ description: Verify the project installs, lints, type-checks, tests, builds and 
 ---
 # Check setup
 
+> Owner: **setup-engineer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-setup-engineer`). Inside it, just do the steps.
+
+
 Run each step and paste the real result (last lines of output):
 
 | Step | Command (adapt to stack) | Result |

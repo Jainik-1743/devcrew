@@ -4,6 +4,9 @@ description: Check screens for WCAG 2.2 AA: contrast, keyboard use, focus, label
 ---
 # Check accessibility (WCAG 2.2 AA)
 
+> Owner: **designer** or **tester** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer` or `role-tester`). Inside it, just do the steps.
+
+
 ## Automated first
 If the app runs: use axe (`npx @axe-core/cli <url>`) or Playwright + `@axe-core/playwright`. Paste the violation summary.
 

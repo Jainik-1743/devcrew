@@ -4,6 +4,8 @@ description: Reproduce a bug, find the real root cause, add a failing test, fix 
 ---
 # Fix bug
 
+> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+
 1. **Reproduce** exactly (steps from the bug report). Can't reproduce → gather more evidence (logs, data, env) before touching code.
 2. **Minimize** — smallest input/steps that still fail.
 3. **Hypothesize** — list ≤3 possible causes; test the cheapest one first with logs or a debugger, not guesses in code.

@@ -4,6 +4,9 @@ description: List user types and their goals and draw each journey step by step 
 ---
 # Map user flows
 
+> Owner: **designer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-designer`). Inside it, just do the steps.
+
+
 Write `docs/design/flows.md`:
 
 1. **User types** — table: type (glossary word), goal, how often, device, skill level.

@@ -4,6 +4,9 @@ description: Scan the codebase once into a small knowledge base (architecture, m
 ---
 # Map codebase
 
+> Owner: **codebase-expert** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-codebase-expert`). Inside it, just do the steps.
+
+
 Outputs in `project/` (templates: `references/templates.md`):
 
 | File | Holds | Budget |

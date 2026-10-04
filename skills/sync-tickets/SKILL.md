@@ -4,6 +4,9 @@ description: Create and update tickets in Jira, Linear or GitHub Issues and keep
 ---
 # Sync tickets
 
+> Owner: **project-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-project-manager`). Inside it, just do the steps.
+
+
 Tracker comes from `project/tools.md` (Jira > Linear > GitHub Issues > local files).
 
 1. Create: epic first, then stories/tasks linked to it. Map fields: title, description (story body as markdown), labels, size → story points (S=1, M=3), dependencies → "blocks" links.

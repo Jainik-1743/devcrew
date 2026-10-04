@@ -4,6 +4,9 @@ description: Turn approved wireframes into production UI code using the design s
 ---
 # Build UI
 
+> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+
+
 Inputs: ticket, approved wireframe, `docs/design/design-system.md`, tokens.
 
 1. Find existing components first (grep the components folder). Reuse > extend > create.

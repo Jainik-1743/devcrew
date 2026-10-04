@@ -4,6 +4,9 @@ description: Find gaps in requirements and ask about them in small rounds of que
 ---
 # Ask questions
 
+> Owner: **analyst** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst`). Inside it, just do the steps.
+
+
 ## Before asking
 Read the brief, glossary, decisions and assumptions. Infer what you can. Check every topic in
 `references/checklist.md`; a gap is a question only if the answer changes scope, cost, design or data.
@@ -20,5 +23,8 @@ Read the brief, glossary, decisions and assumptions. Infer what you can. Check e
 Record answers in the question file. Unanswered by the deadline → default, logged in
 `project/assumptions.md`. Stop when a round has no new BLOCKER/IMPORTANT gaps.
 
-When talking directly to the user and the AskUserQuestion tool exists, use it: one card per question,
-recommended option first with "(Recommended)".
+## Asking as multiple choice
+Subagents can't ask the user. The analyst writes the cards and returns their IDs; the **main chat** asks them.
+With the AskUserQuestion tool: up to 4 cards per call, BLOCKER first, 2–4 options each, recommended option
+first with "(Recommended)" ("Other" is added automatically). Record each answer in its card, then ask the next batch.
+Without the tool: print cards as `A) / B) / C)` and accept replies like `Q3: B`.

@@ -4,6 +4,9 @@ description: Size each ticket S or M and split anything larger. Use after ticket
 ---
 # Estimate tickets
 
+> Owner: **project-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-project-manager`). Inside it, just do the steps.
+
+
 Sizes: **S** < half a day · **M** about a day · **L** = must split (never stays L).
 
 For each ticket, estimate from: number of acceptance checks, layers touched (UI/API/data), new vs reused components, unknowns, integrations.

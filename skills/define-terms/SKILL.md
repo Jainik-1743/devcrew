@@ -4,6 +4,9 @@ description: Build and maintain a glossary so everyone uses the same words for t
 ---
 # Define terms
 
+> Owner: **analyst** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-analyst`). Inside it, just do the steps.
+
+
 Maintain `project/glossary.md` as a table:
 
 | Term | Meaning | Not to be called | Code name |

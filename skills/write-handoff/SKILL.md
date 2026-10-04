@@ -4,6 +4,9 @@ description: Write a short handoff note so a fresh session can continue without 
 ---
 # Write handoff
 
+> Owner: **team-lead** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-team-lead`). Inside it, just do the steps.
+
+
 Create `project/handoffs/YYYY-MM-DD-HHMM.md` (≤25 lines):
 
 ```

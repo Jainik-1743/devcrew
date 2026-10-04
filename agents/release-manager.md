@@ -2,7 +2,7 @@
 name: release-manager
 description: Opens the pull request, writes release notes, verifies CI and the deploy, and sends Slack updates and a status report. Use when tickets are done and ready to ship.
 tools: Read, Grep, Glob, Write, Edit, Bash
-model: haiku
+model: inherit
 color: orange
 skills:
   - prepare-release

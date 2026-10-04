@@ -4,6 +4,9 @@ description: Turn every found bug into an automated test that fails before the f
 ---
 # Add regression test
 
+> Owner: **developer** or **tester** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer` or `role-tester`). Inside it, just do the steps.
+
+
 1. Pick the cheapest level that reproduces the bug: unit < integration < e2e.
 2. Name it after the bug: `it("does not allow double booking when two users confirm at once (PROJ-30)")`.
 3. Use the exact steps/data from the bug report. Run it against the unfixed code: it **must fail**. Paste the failure.

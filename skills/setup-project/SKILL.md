@@ -4,6 +4,9 @@ description: Create the code project to the team standard: feature folders, lint
 ---
 # Setup project
 
+> Owner: **setup-engineer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-setup-engineer`). Inside it, just do the steps.
+
+
 Use the framework's official scaffolder non-interactively, then apply the standard in `references/standard.md`.
 
 1. Scaffold (latest stable versions; check the registry, not memory).

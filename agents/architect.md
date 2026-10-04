@@ -2,8 +2,7 @@
 name: architect
 description: Chooses the stack and designs architecture, database and API, running tiny experiments for unknowns. Use after requirements are approved and before setup or tickets.
 tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch
-model: opus
-effort: high
+model: inherit
 color: orange
 skills:
   - design-architecture

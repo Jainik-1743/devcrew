@@ -4,6 +4,9 @@ description: Check every ticket meets the Done rules, open the PR with the templ
 ---
 # Prepare release
 
+> Owner: **release-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-release-manager`). Inside it, just do the steps.
+
+
 1. **Done gate** — for each ticket: checks pass · tests added · reviewer approved · tester passed · docs updated. Any miss → stop and list it.
 2. **PR** — `gh pr create` with the template: what changed, tickets (links), screenshots, how it was tested, risks, rollback plan.
 3. **CI** — `gh pr checks --watch`. On failure: report the failing step + log excerpt.

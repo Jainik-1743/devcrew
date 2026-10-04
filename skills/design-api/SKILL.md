@@ -4,6 +4,9 @@ description: Design API endpoints with request, response, errors, auth and pagin
 ---
 # Design API
 
+> Owner: **architect** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-architect`). Inside it, just do the steps.
+
+
 Write `docs/tech/api.md` (or an OpenAPI file if the stack generates docs from it):
 
 Per endpoint:

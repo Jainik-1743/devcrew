@@ -4,6 +4,9 @@ description: Write a failing test from each acceptance check, make it pass with 
 ---
 # Write test first (red → green → refactor)
 
+> Owner: **developer** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-developer`). Inside it, just do the steps.
+
+
 For each acceptance check in the ticket, in order:
 
 1. **Red** — write one test whose name is the check ("rejects a booking for a taken slot"). Run it. It must fail **for the right reason** (assertion, not a typo/import error). Paste the failure line.

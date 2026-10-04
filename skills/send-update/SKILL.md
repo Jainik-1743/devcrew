@@ -4,6 +4,9 @@ description: Post a short status update to Slack or a ticket after milestones. U
 ---
 # Send update
 
+> Owner: **release-manager** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-release-manager`). Inside it, just do the steps.
+
+
 Draft (≤5 lines), show it to the user, send only after approval (outward-facing):
 
 ```

@@ -4,6 +4,9 @@ description: Answer questions about the codebase using the project knowledge bas
 ---
 # Answer codebase question
 
+> Owner: **codebase-expert** agent. Not running as it? Delegate this skill to it (no subagents: follow `role-codebase-expert`). Inside it, just do the steps.
+
+
 1. **Look up first** (cheap): `project/memory.md` (Q&A, gotchas) → `project/modules.md` (where) → `project/architecture.md` (how it fits).
    History questions ("why did we...", "when was...") → `project/decisions.md`, then `project/archive.md`.
 2. **Verify**: open only the files the lookup points to; read just the relevant part. Confirm the answer in code.

@@ -2,7 +2,7 @@
 name: doc-writer
 description: Keeps README and docs true to what was actually built and runs the end-of-sprint review. Use after a release or at the end of a sprint.
 tools: Read, Grep, Glob, Write, Edit, Bash
-model: haiku
+model: inherit
 color: cyan
 skills:
   - update-docs
